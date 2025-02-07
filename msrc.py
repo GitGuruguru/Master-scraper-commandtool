@@ -86,7 +86,8 @@ class WebScraper:
                 data['url'] = url
                 results.append(data)
         return results
-    def get_selectors(self):
+    @classmethod
+    def get_selectors(clm):
         """
         Get selectors from user
         
@@ -116,9 +117,10 @@ class WebScraper:
                         del selectors[record]
                     else:
                         pass
-            self.get_selectors
+            clm.get_selectors
         return selectors
-    def get_pages_from_user(self):
+    @classmethod
+    def get_pages_from_user(cls):
         """
         Get pages from user
         
@@ -126,36 +128,49 @@ class WebScraper:
             None
         
         Returns:
-            arr: Array of pages selected by user
+            list: Array of pages selected by user
         """
         pages = []
         while True:
-            pages = input("Enter page name or done to finish ").strip()
-            if pages == "done":
+            page = input("Enter page name or done to finish ").strip()
+            if page.lower() == "done":
                 break
-         
+            pages.append(page)
+        
         confirm = input("Reset selection (y/n): ").lower()
         
         if confirm == "y":
             deletelist = input("List to deletion (all or page url)").lower().split(" ")
-            if len(deletelist) ==  1 and deletelist[0] == "all":
-                selectors = {}
-            else: 
-                for record in deletelist:
-                   for page in pages:
-                       if page == record:
-                           pages.pop(page)
-            self.get_pages_from_user()
+            if len(deletelist) == 1 and deletelist[0] == "all":
+                pages = []
+            else:
+                pages = [page for page in pages if page.lower() not in deletelist]
+            return cls.get_pages_from_user()
         return pages
-    def get_url(self):
+    @staticmethod
+    def get_url():
+        """
+        Get URL from user
+                
+        Args:
+            None
+                
+        Returns:
+            str: URL entered by user
+        """
+        print("Write a url ex. amazon.com or https://amazon.com")
         url = input("Enter url of site ").strip()
+        
+        # Add scheme if not present
+        if not url.startswith(('http://', 'https://')):
+            url = 'https://' + url
+            
         confirm = input("Reset selection (y/n): ").lower()
         
         if confirm == "y":
-            self.get_url()
+            return WebScraper.get_url()
         
         return url
-            
         
         
         
