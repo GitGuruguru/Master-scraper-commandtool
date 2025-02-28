@@ -22,7 +22,7 @@ pip install requests beautifulsoup4
 ## Installation
 Clone the repository and install the required packages:
 ```sh
-git clone https://github.com/GitGuruguru/Master-scraper-commandtool.git
+git clone "https://github.com/GitGuruguru/Master-scraper-commandtool.git"
 cd WebScraper
 pip install -r requirements.txt
 ```
