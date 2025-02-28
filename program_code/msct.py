@@ -1,4 +1,4 @@
-from msctb import WebScraper
+from program_code.msctb import WebScraper
 
 def main():
     # Get base URL
